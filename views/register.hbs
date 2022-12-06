@@ -1,0 +1,123 @@
+{{!-- {{#if errorMessage}}
+  <div class="alert alert-danger" role="alert">
+    <h3 class="text-center fw-bold">
+      {{errorMessage}}
+    </h3>
+
+  </div>
+
+{{/if}} --}}
+
+<h1 class="my-5 p-3 text-center text-danger">
+  Chọn Đối Tượng Mà Bạn Muốn Đăng Ký !
+</h1>
+
+<div class="w-50 p-3 m-auto">
+  <div class="row g-5">
+    <div class="col-6">
+      <button class="btn btn-success" style="width:100% ;" type="button">
+        <a
+          href="/register/taixe"
+          class="text-light"
+          style="text-decoration: none;"
+        >Tài xế</a>
+      </button></div>
+    <div class="col-6">
+      <button class="btn btn-success" style="width:100% ;" type="button">
+        <a
+          href="/register/doitac"
+          class="text-light"
+          style="text-decoration: none;"
+        >Đối tác</a>
+      </button></div>
+    <div class="col-6">
+      <button class="btn btn-success" style="width:100% ;" type="button">
+        <a
+          href="/register/khachhang"
+          class="text-light"
+          style="text-decoration: none;"
+        >Khách hàng</a>
+      </button></div>
+    <div class="col-6">
+      <button class="btn btn-success" style="width:100% ;" type="button">
+        <a
+          href="/register/nhanvien"
+          class="text-light"
+          style="text-decoration: none;"
+        >Nhân viên</a>
+      </button></div>
+
+  </div>
+
+  {{! <form class="mx-1 mx-md-4" action="/register" method="POST">
+
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="Name"
+          required
+        />
+        <label class="form-label" for="name">Your Name</label>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Email"
+          required
+        />
+        <label class="form-label" for="email">Your Email</label>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Password"
+        />
+        <label class="form-label" for="password">Password</label>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row align-items-center mb-4">
+
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="password"
+          id="password1"
+          name="password1"
+          class="form-control"
+          placeholder="Confirm Password"
+        />
+        <label class="form-label" for="password1">Confirm your password</label>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-start mb-5">
+      <p class="me-2">Already Registerd?</p>
+      <a
+        href="/login"
+        class="link-warning fw-bold"
+        style="text-decoration: none;"
+      >
+        Login here</a>
+    </div>
+
+    <button type="submit" class="btn btn-warning btn-lg">Register</button>
+
+  </form> }}
+
+</div>
