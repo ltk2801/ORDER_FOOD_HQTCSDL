@@ -11,3 +11,5 @@ router.get(
 );
 
 router.post("/register/khachhang", khController.postRegisterKH);
+
+module.exports = router;

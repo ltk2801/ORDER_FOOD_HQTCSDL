@@ -7,8 +7,23 @@ exports.getRegister = async function (req, res, next) {
 };
 
 exports.getLogin = async function (req, res, next) {
+  let report = req.flash("report");
+  let message = req.flash("error");
+  if (message.length > 0) {
+    message = message;
+  } else {
+    message = null;
+  }
+  if (report.length > 0) {
+    report = report;
+  } else {
+    report = null;
+  }
+
   res.render("login", {
     pageTitle: "Login",
+    errorMessage: message,
+    reportMessage: report,
   });
 };
 
@@ -19,11 +34,11 @@ exports.postLogin = async function (req, res, next) {
     .findUName(nameUser)
     .then((user) => {
       if (user.length == 0) {
-        console.log("ko tim thay tai khoan");
+        req.flash("error", "Invalid email or password !");
         return res.redirect("/login");
       }
       if (user[0].Password != passwordUser) {
-        console.log("sai pass");
+        req.flash("error", "Password wrong ! ");
         return res.redirect("/login");
       }
       const perU = user[0].Permission;
@@ -48,7 +63,7 @@ exports.postLogin = async function (req, res, next) {
           break;
       }
       return req.session.save((err) => {
-        console.log(req.session);
+        // console.log(req.session);
         console.log(err);
         res.redirect("/user");
       });

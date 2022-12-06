@@ -1,3 +1,13 @@
+{{#if errorMessage}}
+  <div class="alert alert-danger" role="alert">
+    <h3 class="text-center fw-bold">
+      {{errorMessage}}
+    </h3>
+
+  </div>
+
+{{/if}}
+
 <h1 class="my-5 pt-4 text-center text-danger">
   ĐỐI TÁC
 </h1>
@@ -63,6 +73,32 @@
         <label class="form-label" for="uname">Họ tên đối tác </label>
       </div>
     </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="text"
+          id="sdt"
+          name="sdt"
+          class="form-control"
+          placeholder="Số điện thoại"
+          required
+        />
+        <label class="form-label" for="sdt">Số điện thoại </label>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="text"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Email"
+          required
+        />
+        <label class="form-label" for="email">Email </label>
+      </div>
+    </div>
 
     <div class="d-flex flex-row align-items-center mb-4">
       <div class="form-outline flex-fill mb-0">
@@ -82,26 +118,52 @@
       <div class="form-outline flex-fill mb-0">
         <input
           type="text"
-          id="tp"
-          name="tp"
+          id="dcdt"
+          name="dcdt"
           class="form-control"
-          placeholder="Thành phố"
+          placeholder="Địa chỉ đối tác"
           required
         />
-        <label class="form-label" for="tp">Thành phố </label>
+        <label class="form-label" for="dcdt">Địa chỉ đối tác </label>
       </div>
     </div>
     <div class="d-flex flex-row align-items-center mb-4">
       <div class="form-outline flex-fill mb-0">
         <input
           type="text"
-          id="quan"
-          name="quan"
+          id="dckd"
+          name="dckd"
           class="form-control"
-          placeholder="Quận"
+          placeholder="Địa chỉ kinh doanh"
           required
         />
-        <label class="form-label" for="quan">Quận </label>
+        <label class="form-label" for="dckd">Địa chỉ kinh doanh </label>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="text"
+          id="tqa"
+          name="tqa"
+          class="form-control"
+          placeholder="Tên quán ăn"
+          required
+        />
+        <label class="form-label" for="tqa">Tên quán ăn </label>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-4">
+      <div class="form-outline flex-fill mb-0">
+        <input
+          type="text"
+          id="lat"
+          name="lat"
+          class="form-control"
+          placeholder="Loại ẩm thực"
+          required
+        />
+        <label class="form-label" for="lat">Loại ẩm thực </label>
       </div>
     </div>
     <div class="d-flex flex-row align-items-center mb-4">
@@ -128,45 +190,6 @@
           required
         />
         <label class="form-label" for="sld">Số lượng đơn hàng / ngày </label>
-      </div>
-    </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <div class="form-outline flex-fill mb-0">
-        <input
-          type="text"
-          id="lat"
-          name="lat"
-          class="form-control"
-          placeholder="Loại ẩm thực"
-          required
-        />
-        <label class="form-label" for="lat">Loại ẩm thực </label>
-      </div>
-    </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <div class="form-outline flex-fill mb-0">
-        <input
-          type="text"
-          id="sdt"
-          name="sdt"
-          class="form-control"
-          placeholder="Số điện thoại"
-          required
-        />
-        <label class="form-label" for="sdt">Số điện thoại </label>
-      </div>
-    </div>
-    <div class="d-flex flex-row align-items-center mb-4">
-      <div class="form-outline flex-fill mb-0">
-        <input
-          type="text"
-          id="email"
-          name="email"
-          class="form-control"
-          placeholder="Email"
-          required
-        />
-        <label class="form-label" for="email">Email </label>
       </div>
     </div>
 

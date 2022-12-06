@@ -7,3 +7,5 @@ const txController = require("../controllers/taixe");
 router.get("/register/taixe", isAuth.authHaveUser, txController.getRegisterTX);
 
 router.post("/register/taixe", txController.postRegisterTX);
+
+module.exports = router;

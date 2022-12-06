@@ -11,3 +11,5 @@ router.get(
 );
 
 router.post("/register/nhanvien", nvController.postRegisterNV);
+
+module.exports = router;

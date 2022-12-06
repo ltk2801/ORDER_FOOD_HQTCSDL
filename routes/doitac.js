@@ -7,3 +7,5 @@ const dtController = require("../controllers/doitac");
 router.get("/register/doitac", isAuth.authHaveUser, dtController.getRegisterDT);
 
 router.post("/register/doitac", dtController.postRegisterDT);
+
+module.exports = router;

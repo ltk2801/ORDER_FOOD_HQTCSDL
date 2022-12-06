@@ -3,10 +3,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
-const userM = require("./models/user");
 
 const homeRoutes = require("./routes/home");
 const userRoutes = require("./routes/user");
+const dtRoutes = require("./routes/doitac");
+const khRoutes = require("./routes/khachhang");
+const nvRoutes = require("./routes/nhanvien");
+const txRoutes = require("./routes/taixe");
+
 const session = require("express-session");
 
 const app = express();
@@ -25,15 +29,7 @@ app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
   }
-  // userM
-  //   .findUName(req.session.user.UName)
-  //   .then((user) => {
-  //     req.user = user[0];
-  //     next();
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+
   req.user = req.session.user;
   next();
 });
@@ -46,6 +42,10 @@ app.use((req, res, next) => {
 
 app.use(homeRoutes);
 app.use(userRoutes);
+app.use(dtRoutes);
+app.use(khRoutes);
+app.use(nvRoutes);
+app.use(txRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode | 500;
