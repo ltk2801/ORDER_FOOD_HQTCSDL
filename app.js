@@ -3,8 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+const userM = require("./models/user");
 
 const homeRoutes = require("./routes/home");
+const userRoutes = require("./routes/user");
+const session = require("express-session");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,8 +19,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(flash());
 
 require("./config/hbs")(app);
+require("./config/session")(app);
+
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  // userM
+  //   .findUName(req.session.user.UName)
+  //   .then((user) => {
+  //     req.user = user[0];
+  //     next();
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  req.user = req.session.user;
+  next();
+});
+
+// locals
+app.use((req, res, next) => {
+  res.locals.haveUser = req.session.isLoggedIn;
+  next();
+});
 
 app.use(homeRoutes);
+app.use(userRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode | 500;

@@ -1,9 +1,20 @@
 <nav
-  class="navbar navbar-light mt-2 text-dark"
-  style="background-color: #87c38f;"
+  class="navbar navbar-light mt-2 mb-3 text-dark px-2 rounded"
+  style="background-color: #e9c46a;"
 >
   <div class="container-fluid p-3">
-    <a class="navbar-brand text-dark fw-bold" href="/">Home</a>
-
+    <a
+      class="navbar-brand text-primary fw-bold"
+      style="color: #00b4d8;"
+      href="/"
+    >Home</a>
+    {{#if haveUser}}
+      <a
+        class="navbar-brand text-primary fw-bold"
+        style="color: #00b4d8;"
+        href="/user"
+      >User</a>
+    {{/if}}
   </div>
+
 </nav>

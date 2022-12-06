@@ -4,38 +4,37 @@ exports.getHome = async function (req, res, next) {
   });
 };
 
-exports.getRegister = async function (req, res, next) {
-  res.render("register", {
-    pageTitle: "Register",
-  });
-};
+exports.getDetailP = async function (req, res, next) {
+  let user = req.user;
 
-exports.getLogin = async function (req, res, next) {
-  res.render("login", {
-    pageTitle: "Login",
-  });
-};
+  let admin = user.perAdmin;
+  let doitac = user.perDt;
+  let taixe = user.perTx;
+  let khachhang = user.perKh;
+  let nhanvien = user.perNv;
 
-exports.getRegisterTX = async function (req, res, next) {
-  res.render("registertx", {
-    pageTitle: "Register Tài Xế",
-  });
-};
-
-exports.getRegisterDT = async function (req, res, next) {
-  res.render("registerdt", {
-    pageTitle: "Register Đối Tác",
-  });
-};
-
-exports.getRegisterNV = async function (req, res, next) {
-  res.render("registernv", {
-    pageTitle: "Register Nhân Viên",
-  });
-};
-
-exports.getRegisterKH = async function (req, res, next) {
-  res.render("registerkh", {
-    pageTitle: "Register Khách Hàng",
+  let pageTitle;
+  if (admin) {
+    pageTitle = "Admin Page";
+  }
+  if (doitac) {
+    pageTitle = "Đối Tác Page";
+  }
+  if (taixe) {
+    pageTitle = "Tài Xế Page";
+  }
+  if (khachhang) {
+    pageTitle = "Khách Hàng Page";
+  }
+  if (nhanvien) {
+    pageTitle = "Nhân Viên Page";
+  }
+  res.render("userP", {
+    pageTitle: pageTitle,
+    admin: admin,
+    nhanvien: nhanvien,
+    khachhang: khachhang,
+    taixe: taixe,
+    doitac: doitac,
   });
 };

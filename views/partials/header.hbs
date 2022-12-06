@@ -1,24 +1,38 @@
-<div class="fw-bold p-3 text-dark" style="background-color: #87c38f;">
+<div class="fw-bold p-3 text-dark rounded" style="background-color: #e9c46a;">
   <div class="text-center">
     <h1>Food Order </h1>
   </div>
 
-  <div class="text-end">
+  {{#if haveUser}}
+    <div class="text-end d-flex justify-content-end gap-4">
 
-    <button class="btn btn-success" style="width:10% ;" type="button">
-      <a
-        href="/register"
-        class="text-light"
-        style="text-decoration: none;"
-      >Register</a>
-    </button>
-    <button class="btn btn-success" style="width:10% ;" type="button">
-      <a
-        href="/login"
-        class="text-light"
-        style="text-decoration: none;"
-      >Login</a>
-    </button>
-  </div>
+      <form action="/logout" method="POST">
+        <button class="btn btn-success text-light" type="submit">
+          Logout
+        </button>
+      </form>
+
+    </div>
+
+  {{else}}
+    <div class="text-end">
+
+      <button class="btn btn-success" style="width:10% ;" type="button">
+        <a
+          href="/register"
+          class="text-light"
+          style="text-decoration: none;"
+        >Register</a>
+      </button>
+      <button class="btn btn-success" style="width:10% ;" type="button">
+        <a
+          href="/login"
+          class="text-light"
+          style="text-decoration: none;"
+        >Login</a>
+      </button>
+    </div>
+
+  {{/if}}
 
 </div>
