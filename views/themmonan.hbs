@@ -1,0 +1,120 @@
+<div class="container-fluid">
+  <div class="row gap-3 flex-nowrap p-3 fw-bold">
+    <div class="col-md-3 px-0 rounded" style="background-color: #14213d;">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+      >
+        <a
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none p-2"
+        >
+          <span class="fs-5 d-none d-sm-inline"><h1
+              style="color: #a61e4d;"
+            >Menu</h1></span>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          id="menu"
+        >
+          <li class="nav-item">
+            <a href="/" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/user" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Thông Tin Cá Nhân</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/doitac/cuahang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Cửa Hàng</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/doitac/donhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Đơn Hàng</span>
+            </a>
+          </li>
+
+        </ul>
+        <hr />
+      </div>
+    </div>
+    <div class="col py-3">
+      <div class="mb-5">
+        <h1>Thêm món ăn vào cửa hàng {{idCH}}</h1>
+
+      </div>
+      <div class="w-100 d-flex justify-content-start">
+        <form
+          class="mx-1 mx-md-4 pb-5 fw-bold w-50"
+          action="/doitac/themmonan"
+          method="POST"
+        >
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <input
+                type="text"
+                id="tenmon"
+                name="tenmon"
+                class="form-control"
+                placeholder="Tên Món Ăn"
+              />
+              <label class="form-label" for="tenmon">Tên Món Ăn </label>
+            </div>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <input
+                type="text"
+                id="gt"
+                name="gt"
+                class="form-control"
+                placeholder="Giá Thành"
+              />
+              <label class="form-label" for="gt">Giá Thành </label>
+            </div>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <input
+                type="text"
+                id="mt"
+                name="mt"
+                class="form-control"
+                placeholder="Miêu tả"
+              />
+              <label class="form-label" for="mt">Miêu Tả </label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                name="tt"
+                id="tt"
+              >
+                <option selected>Tình trạng món ăn</option>
+                <option value="Có bán">Có bán</option>
+                <option value="Hết hàng">Hết hàng</option>
+                <option value="Tạm ngưng">Tạm ngưng</option>
+              </select>
+              <label for="tt">Tình trạng món ăn :</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-lg">Thêm Món Ăn</button>
+          <input type="hidden" value="{{idCH}}" name="chId" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

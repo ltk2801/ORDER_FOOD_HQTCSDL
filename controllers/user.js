@@ -63,8 +63,7 @@ exports.postLogin = async function (req, res, next) {
           break;
       }
       return req.session.save((err) => {
-        // console.log(req.session);
-        console.log(err);
+        // console.log(req.session.user.Permission);
         res.redirect("/user");
       });
     })

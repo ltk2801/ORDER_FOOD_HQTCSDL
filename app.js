@@ -31,12 +31,32 @@ app.use((req, res, next) => {
   }
 
   req.user = req.session.user;
-  next();
+  let doitac = req.user.perDt;
+  let taixe = req.user.perTx;
+  let khachhang = req.user.perKh;
+  let nhanvien = req.user.perNv;
+  if (doitac) {
+    res.locals.perDT = true;
+    return next();
+  }
+  if (taixe) {
+    res.locals.perTX = true;
+    return next();
+  }
+  if (khachhang) {
+    res.locals.perKH = true;
+    return next();
+  }
+  if (nhanvien) {
+    res.locals.perNV = true;
+    return next();
+  }
 });
 
 // locals
 app.use((req, res, next) => {
   res.locals.haveUser = req.session.isLoggedIn;
+  res.locals.reportMessage = req.flash("report");
   next();
 });
 

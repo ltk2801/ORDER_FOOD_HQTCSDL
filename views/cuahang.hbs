@@ -1,0 +1,119 @@
+
+  <div class="container-fluid">
+    <div class="row gap-3 flex-nowrap p-3 fw-bold">
+      <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
+        <div
+          class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+        >
+          <a
+            class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none p-2"
+          >
+            <span class="fs-5 d-none d-sm-inline"><h1
+                style="color: #a61e4d;"
+              >Menu</h1></span>
+          </a>
+          <ul
+            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+            id="menu"
+          >
+            <li class="nav-item">
+              <a href="/" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/user" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Thông Tin Cá
+                  Nhân</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/doitac/cuahang" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Cửa Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/doitac/donhang"  class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Đơn Hàng</span>
+              </a>
+            </li>
+
+          </ul>
+          <hr />
+        </div>
+      </div>
+      <div class="col py-3">
+        {{#if reportMessage}}
+  <div class="alert alert-success" role="alert">
+    <h3 class="text-center fw-bold">
+      {{reportMessage}}
+    </h3>
+
+  </div>
+
+{{/if}}
+        <div class="d-flex justify-content-between mb-5">
+              <h1>Danh sách cửa hàng</h1>
+              
+              <form action="/doitac/themcuahang" method="get">
+                  <button class="btn btn-success" type="submit">Thêm cửa hàng</button>
+              </form>
+           
+               
+        </div>
+        <table class="table table-striped rounded" style="background-color:#f0f8ff ;">
+  <thead>
+    <tr>
+      <th scope="col">Mã Cửa Hàng</th>
+      <th scope="col">Tên Quán Ăn</th>
+      <th scope="col">Địa chỉ</th>
+      <th scope="col">Thời Gian Hoạt Động</th>
+      <th scope="col">Tình Trạng</th>
+       <th scope="col"></th>
+        <th scope="col"></th>
+         <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+{{#each shops}}
+    <tr>
+      <th scope="row">{{this.MaCuaHang}}</th>
+      <td>{{this.TenQuan}}</td>
+      <td>{{this.DiaChi}}</td>
+      <td>{{this.ThoiGianHD}}</td>
+      <td>{{this.TinhTrang}}</td>
+      <td>
+        <form action="/doitac/cuahang/{{this.MaCuaHang}}" method="get">
+             <button class="btn btn-success">Menu</button>
+        </form>
+       
+        </td>
+              <td>
+        <form action="/doitac/edit-cuahang/{{this.MaCuaHang}}" method="get">
+             <button class="btn btn-success">Edit</button>
+        </form>
+       
+        </td>    <td>
+        <form action="/doitac/delete-cuahang" method="post">
+             <button class="btn btn-danger">Delete</button>
+              <input type="hidden" value="{{this.MaCuaHang}}" name="chId">
+        </form>
+       
+        </td>
+      </tr>
+  {{/each}}
+
+   
+ 
+ 
+   
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>

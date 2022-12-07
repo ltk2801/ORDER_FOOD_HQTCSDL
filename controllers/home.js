@@ -43,7 +43,7 @@ exports.getDetailP = async function (req, res, next) {
     const infoU = await nhanvienM.getInfo(user.Email);
     curU = infoU[0];
   }
-  console.log(user);
+  // console.log(user);
   res.render("userP", {
     pageTitle: pageTitle,
     admin: admin,

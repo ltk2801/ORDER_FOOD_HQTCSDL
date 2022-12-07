@@ -79,3 +79,59 @@ exports.postRegisterNV = async function (req, res, next) {
       console.log(err);
     });
 };
+
+exports.getDSHD = async function (req, res, next) {
+  let report = req.flash("report");
+
+  if (report.length > 0) {
+    report = report;
+  } else {
+    report = null;
+  }
+  const hdArr = await nhanvienM.getDSHD();
+  res.render("dshd", {
+    pageTitle: "Danh Sách Hợp Đồng",
+    hopdongs: hdArr,
+    reportMessage: report,
+  });
+};
+
+exports.getDSHDCD = async function (req, res, next) {
+  const hdArr = await nhanvienM.getDSHDCD();
+  res.render("dshdcd", {
+    pageTitle: "Danh Sách Hợp Đồng Chờ Duyệt",
+    hopdongs: hdArr,
+  });
+};
+
+exports.getHD = async function (req, res, next) {
+  const hdId = req.params.hopdongid;
+
+  const hd = await nhanvienM.findHD(hdId);
+  res.render("hd-detail", {
+    pageTitle: "Hợp đồng",
+    HD: hd[0],
+  });
+};
+
+exports.postHD = async function (req, res, next) {
+  const hdId = req.body.mhd;
+  const hd = await nhanvienM.findHD(hdId);
+
+  nhanvienM
+    .addHD(hd[0])
+    .then((result) => {
+      nhanvienM
+        .deleteHDCD(hdId)
+        .then((result) => {
+          req.flash("report", "Bạn Đã Duyệt Hợp Đồng Thành Công !");
+          res.redirect("/nhanvien/danhsachhopdong");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
