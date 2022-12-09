@@ -34,6 +34,14 @@ router.get(
   dtController.getEditMonAn
 );
 
+router.get("/doitac/donhang/:chId", dtController.getDonHangCuaHang);
+
+router.get("/doitac/donhangs/:dhId", dtController.getDonHangCuaHangX);
+
+router.get("/doitac/donhang-edit/:chId/:dhId", dtController.getEditTinhTrang);
+
+router.post("/doitac/donhang-edit", dtController.postEditTinhTrang);
+
 router.post("/doitac/themcuahang", isAuth.authDT, dtController.postAddCuaHang);
 
 router.post(

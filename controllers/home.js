@@ -44,7 +44,7 @@ exports.getDetailP = async function (req, res, next) {
     curU = infoU[0];
   }
   // console.log(user);
-  res.render("userP", {
+  res.render("user-p", {
     pageTitle: pageTitle,
     admin: admin,
     nhanvien: nhanvien,

@@ -2,15 +2,8 @@ const userM = require("../models/user");
 const doitacM = require("../models/doitac");
 
 exports.getRegisterDT = async function (req, res, next) {
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message;
-  } else {
-    message = null;
-  }
-  res.render("registerdt", {
+  res.render("dt-register", {
     pageTitle: "Register Đối Tác",
-    errorMessage: message,
   });
 };
 
@@ -107,15 +100,8 @@ exports.getCuaHang = async function (req, res, next) {
   chArr.map((obj) => {
     return (obj.TenQuan = infodt.TenQuanAn);
   });
-  let report = req.flash("report");
 
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
-
-  res.render("cuahang", {
+  res.render("dt-cuahang", {
     pageTitle: "Cửa hàng của đối tác",
     shops: chArr,
     info: infodt.TenQuanAn,
@@ -123,7 +109,7 @@ exports.getCuaHang = async function (req, res, next) {
 };
 
 exports.addCuahang = async function (req, res, next) {
-  res.render("themcuahang", {
+  res.render("dt-themcuahang", {
     pageTitle: "Thêm cửa hàng của đối tác",
   });
 };
@@ -156,7 +142,7 @@ exports.getEditCuaHang = async function (req, res, next) {
   const shop = await doitacM.getInfoCuaHang(idCH, infoDoiTac[0].MaDoiTac);
   shop[0].TenQuan = infoDoiTac[0].TenQuanAn;
 
-  res.render("cuahang-edit", {
+  res.render("dt-cuahang-edit", {
     pageTitle: "Edit cửa hàng",
     shop: shop[0],
   });
@@ -177,13 +163,6 @@ exports.postEditCuaHang = async function (req, res, next) {
 };
 
 exports.getDetailCuaHang = async function (req, res, next) {
-  let report = req.flash("report");
-
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
   const idCH = req.params.chId;
   const user = req.user;
   const infoDoiTac = await doitacM.getInfo(user.Email);
@@ -191,7 +170,7 @@ exports.getDetailCuaHang = async function (req, res, next) {
 
   const menus = await doitacM.getMenus(idCH, idDT);
 
-  res.render("cuahang-detail", {
+  res.render("dt-cuahang-detail", {
     pageTitle: "Menu Cửa Hàng",
     idCH: idCH,
     menus: menus,
@@ -200,7 +179,7 @@ exports.getDetailCuaHang = async function (req, res, next) {
 
 exports.getThemMonAn = async function (req, res, next) {
   const idCH = req.query.chId;
-  res.render("themmonan", {
+  res.render("dt-themmonan", {
     pageTitle: "Thêm món ăn của cửa hàng",
     idCH: idCH,
   });
@@ -260,8 +239,17 @@ exports.postDeleteMonAn = async function (req, res, next) {
 };
 
 exports.getDonHang = async function (req, res, next) {
-  res.render("donhangdt", {
+  const user = req.user;
+  const infoDoiTac = await doitacM.getInfo(user.Email);
+  const chArr = await doitacM.getCuaHang(infoDoiTac[0].MaDoiTac);
+  let infodt = infoDoiTac[0];
+  chArr.map((obj) => {
+    return (obj.TenQuan = infodt.TenQuanAn);
+  });
+  res.render("dt-donhang", {
     pageTitle: "Đơn hàng của đối tác",
+    shops: chArr,
+    info: infodt.TenQuanAn,
   });
 };
 
@@ -270,7 +258,7 @@ exports.getEditMonAn = async function (req, res, next) {
 
   const food = await doitacM.getInfoMonAn(idma);
 
-  res.render("monan-edit", {
+  res.render("dt-monan-edit", {
     pageTitle: "Edit món ăn",
     food: food[0],
   });
@@ -284,6 +272,74 @@ exports.postEditMonAn = async function (req, res, next) {
     .then((result) => {
       req.flash("report", "Bạn đã edit thành công món ăn");
       res.redirect(`/doitac/cuahang/${food.chId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.getDonHangCuaHang = async function (req, res, next) {
+  const chId = req.params.chId;
+  const user = req.user;
+  const infoDoiTac = await doitacM.getInfo(user.Email);
+
+  const dhId = await doitacM.getIDDH(chId, infoDoiTac[0].MaDoiTac);
+  // console.log(dhId);
+  const dhArr = await doitacM.getDH(dhId);
+  dhArr.map((data) => {
+    data.chId = chId;
+  });
+  // console.log(dhArr);
+
+  res.render("dt-donhang-cuahang", {
+    pageTitle: "Đơn Hàng Của Cửa Hàng",
+    dhArr: dhArr,
+    chId: chId,
+  });
+};
+
+exports.getDonHangCuaHangX = async function (req, res, next) {
+  const dhId = req.params.dhId;
+
+  // console.log(dhId);
+  const infos = await doitacM.getInfoDH(dhId);
+  let total = 0;
+  infos.map((data) => {
+    data.TongGia = data.SoluongMon * data.GiaThanh;
+    total += data.TongGia;
+  });
+  // console.log(infos);
+
+  res.render("dt-donhang-detail", {
+    pageTitle: "Chi tiết đơn hàng",
+    info: infos,
+    total: total,
+  });
+};
+
+exports.getEditTinhTrang = async function (req, res, next) {
+  const dhId = req.params.dhId;
+  // console.log(dhId);
+  const chId = req.params.chId;
+  const infoDH = await doitacM.getTTDH(dhId);
+
+  // console.log(infoDH);
+  res.render("dt-donhang-edit", {
+    pageTitle: "Edit Tình Trạng Đơn Hàng",
+    info: infoDH,
+    chId: chId,
+  });
+};
+
+exports.postEditTinhTrang = async function (req, res, next) {
+  info = req.body;
+
+  // console.log(info);
+  doitacM
+    .updateTTDH(info)
+    .then((result) => {
+      req.flash("report", "Bạn đã edit thành công tình trạng đơn hàng");
+      res.redirect(`/doitac/donhang/${info.chId}`);
     })
     .catch((err) => {
       console.log(err);

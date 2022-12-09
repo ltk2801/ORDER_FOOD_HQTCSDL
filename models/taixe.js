@@ -19,15 +19,49 @@ exports.addTX = async function (account) {
 };
 
 exports.findCmnd = async function (cmnd) {
-  const rs = await db.any('select * from public."TaiXe"where"CMND"like $1', [
+  const rs = await db.any('select * from public."TaiXe"where"CMND" = $1', [
     cmnd,
   ]);
   return rs;
 };
 
 exports.getInfo = async function (email) {
-  const rs = await db.any('select * from public."TaiXe"where"Email"like $1', [
+  const rs = await db.any('select * from public."TaiXe"where"Email" = $1', [
     email,
   ]);
+  return rs;
+};
+
+exports.getDanhSachDonHang = async function () {
+  const rs = await db.any(
+    'select * from public."DonHang" where "TaiXe" is $1 ',
+    [null]
+  );
+  return rs;
+};
+
+exports.updateDonHangTaiXe = async function (dhId, txId) {
+  const rs = await db.any(
+    'UPDATE public."DonHang" SET "TaiXe" = $1 WHERE "MaDH" = $2  ',
+    [txId, dhId]
+  );
+
+  return rs;
+};
+
+exports.getDanhSachDonHangTaiXe = async function (idTx) {
+  const rs = await db.any(
+    'select * from public."DonHang" where "TaiXe" = $1 ',
+    [idTx]
+  );
+  return rs;
+};
+
+exports.updateTinhTrangDonHangTaiXe = async function (info) {
+  const rs = await db.any(
+    'UPDATE public."DonHang" SET "TinhTrangDH" = $1 WHERE "MaDH" = $2  ',
+    [info.tt, info.mdh]
+  );
+
   return rs;
 };

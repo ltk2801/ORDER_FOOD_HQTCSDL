@@ -2,15 +2,8 @@ const userM = require("../models/user");
 const nhanvienM = require("../models/nhanvien");
 
 exports.getRegisterNV = async function (req, res, next) {
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message;
-  } else {
-    message = null;
-  }
-  res.render("registernv", {
+  res.render("nv-register", {
     pageTitle: "Register Nhân Viên",
-    errorMessage: message,
   });
 };
 
@@ -81,24 +74,16 @@ exports.postRegisterNV = async function (req, res, next) {
 };
 
 exports.getDSHD = async function (req, res, next) {
-  let report = req.flash("report");
-
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
   const hdArr = await nhanvienM.getDSHD();
-  res.render("dshd", {
+  res.render("nv-dshd", {
     pageTitle: "Danh Sách Hợp Đồng",
     hopdongs: hdArr,
-    reportMessage: report,
   });
 };
 
 exports.getDSHDCD = async function (req, res, next) {
   const hdArr = await nhanvienM.getDSHDCD();
-  res.render("dshdcd", {
+  res.render("nv-dshdcd", {
     pageTitle: "Danh Sách Hợp Đồng Chờ Duyệt",
     hopdongs: hdArr,
   });
@@ -108,7 +93,7 @@ exports.getHD = async function (req, res, next) {
   const hdId = req.params.hopdongid;
 
   const hd = await nhanvienM.findHD(hdId);
-  res.render("hd-detail", {
+  res.render("nv-hd-detail", {
     pageTitle: "Hợp đồng",
     HD: hd[0],
   });
@@ -117,6 +102,10 @@ exports.getHD = async function (req, res, next) {
 exports.postHD = async function (req, res, next) {
   const hdId = req.body.mhd;
   const hd = await nhanvienM.findHD(hdId);
+
+  const idHD = await nhanvienM.getLastHD();
+
+  hd[0].idHDDT = Number(idHD) + 1;
 
   nhanvienM
     .addHD(hd[0])

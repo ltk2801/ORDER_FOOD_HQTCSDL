@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row gap-3 flex-nowrap p-3 fw-bold">
+    <div class="col-md-3 px-0 rounded" style="background-color: #14213d;">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+      >
+        <a
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none p-2"
+        >
+          <span class="fs-5 d-none d-sm-inline"><h1
+              style="color: #a61e4d;"
+            >Menu</h1></span>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          id="menu"
+        >
+          <li class="nav-item">
+            <a href="/" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/user" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Thông Tin Cá Nhân</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/chondonhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Chọn đơn hàng</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/donhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Đơn hàng đang
+                giao</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/lichsudonhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Xem Danh Sách Đơn
+                Hàng Đã Giao</span>
+            </a>
+          </li>
+
+        </ul>
+        <hr />
+      </div>
+    </div>
+    <div class="col py-3">
+      <h1 class="mb-5">Danh sách đơn hàng hiện có</h1>
+      <table
+        class="table table-striped rounded"
+        style="background-color:#f0f8ff ;"
+      >
+        <thead>
+          <tr>
+            <th scope="col">Mã Đơn Hàng</th>
+            <th scope="col">Mã Khách Hàng</th>
+            <th scope="col">Hình Thức Thanh Toán </th>
+            <th scope="col">Tình Trạng Đơn Hàng</th>
+            <th scope="col">Tổng Giá Đơn Hàng</th>
+            <th scope="col">Tổng Giá Món Ăn</th>
+            <th scope="col">Phí Vận Chuyển</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each donhangs}}
+            <tr>
+              <th scope="row">{{this.MaDH}}</th>
+              <td>{{this.MaKH}}</td>
+              <td>{{this.HinhThucTT}}</td>
+              <td>{{this.TinhTrangDH}}</td>
+              <td>{{this.TongGia}}</td>
+              <td>{{this.GiaDoAn}}</td>
+              <td>{{this.PhiVanChuyen}}</td>
+              <td>
+                <form action="/taixe/chondonhang" method="post">
+                  <button class="btn btn-success">Chọn</button>
+                  <input type="hidden" value="{{this.MaDH}}" name="dhId" />
+                </form>
+
+              </td>
+
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

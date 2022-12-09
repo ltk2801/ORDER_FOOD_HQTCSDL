@@ -19,10 +19,9 @@ exports.getLastID_NV = async function () {
 };
 
 exports.getInfo = async function (email) {
-  const rs = await db.any(
-    'select * from public."NhanVien"where"Email"like $1',
-    [email]
-  );
+  const rs = await db.any('select * from public."NhanVien"where"Email" = $1', [
+    email,
+  ]);
   return rs;
 };
 
@@ -52,7 +51,7 @@ exports.addHD = async function (hd) {
     `insert into public.\"HopDong\"(\"MaHopDong\",\"MaSoThue\",\"NguoiDaiDien\", \"SoChiNhanh\", \"PhiKichHoat\", \"NgayLap\", \"NgayKT\")
           VALUES ($1, $2, $3, $4, $5,$6,$7) returning *`,
     [
-      hd.MaHopDong,
+      hd.idHDDT,
       hd.MaSoThue,
       hd.NguoiDaiDien,
       hd.SoChiNhanh,
@@ -70,4 +69,12 @@ exports.deleteHDCD = async function (id) {
     [id]
   );
   return rs;
+};
+
+exports.getLastHD = async function () {
+  const rs = await db.any('select * from public."HopDong"');
+  if (rs.length == 0) {
+    return 0;
+  }
+  return rs[rs.length - 1].MaHopDong;
 };

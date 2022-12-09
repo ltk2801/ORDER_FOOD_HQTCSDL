@@ -73,23 +73,22 @@ exports.AddHDCD = async function (account) {
 };
 
 exports.getInfo = async function (email) {
-  const rs = await db.any('select * from public."DoiTac"where"Email"like $1', [
+  const rs = await db.any('select * from public."DoiTac"where"Email" = $1', [
     email,
   ]);
   return rs;
 };
 
 exports.getInfoID = async function (id) {
-  const rs = await db.any(
-    'select * from public."DoiTac"where"MaDoiTac"like $1',
-    [id]
-  );
+  const rs = await db.any('select * from public."DoiTac"where"MaDoiTac" = $1', [
+    id,
+  ]);
   return rs;
 };
 
 exports.getCuaHang = async function (iddt) {
   const rs = await db.any(
-    'select * from public."CuaHang"where"MaDoiTac"like $1',
+    'select * from public."CuaHang"where"MaDoiTac" = $1',
     [iddt]
   );
   return rs;
@@ -165,6 +164,51 @@ exports.updateMonAn = async function (food) {
   const rs = await db.any(
     'UPDATE public."ThucDon" SET "TenMon" = $1, "GiaThanh" = $2 , "MieuTa" = $3 , "TinhTrang" = $4 WHERE "MaMon" = $5  ',
     [food.namef, food.gt, food.mt, food.tt, food.monanId]
+  );
+
+  return rs;
+};
+
+exports.getIDDH = async function (idCh, idDt) {
+  const rs = await db.any(
+    'select distinct("MaDH") from public."CTDH" WHERE "MaCuaHang" = $1 AND "MaDoiTac" = $2  ',
+    [idCh, idDt]
+  );
+
+  return rs;
+};
+
+exports.getDH = async function (info) {
+  const infos = info.map(async (data) => {
+    const rs = await db.any(
+      'SELECT * FROM public."DonHang" WHERE "MaDH" = $1  ',
+      [data.MaDH]
+    );
+    return rs[0];
+  });
+  return Promise.all(infos);
+};
+
+exports.getInfoDH = async function (dhId) {
+  const rs = await db.any(
+    'SELECT CTDH."MaDH", TD."MaMon",TD."TenMon",CTDH."SoluongMon", TD."GiaThanh" FROM public."CTDH" as CTDH Inner join public."ThucDon" as TD ON CTDH."MaMon" = TD."MaMon" AND CTDH."MaDH" = $1 ',
+    [dhId]
+  );
+  return rs;
+};
+
+exports.getTTDH = async function (id) {
+  const rs = await db.any(
+    'SELECT * FROM public."DonHang" WHERE "MaDH" = $1  ',
+    [id]
+  );
+  return rs[0];
+};
+
+exports.updateTTDH = async function (info) {
+  const rs = await db.any(
+    'UPDATE public."DonHang" SET "TinhTrangDH" = $1 WHERE "MaDH" = $2  ',
+    [info.tt, info.mdh]
   );
 
   return rs;

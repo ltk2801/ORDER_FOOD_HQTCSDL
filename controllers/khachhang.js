@@ -4,15 +4,8 @@ const doitacM = require("../models/doitac");
 const { as } = require("pg-promise");
 
 exports.getRegisterKH = async function (req, res, next) {
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message;
-  } else {
-    message = null;
-  }
-  res.render("registerkh", {
+  res.render("kh-register", {
     pageTitle: "Register Khách Hàng",
-    errorMessage: message,
   });
 };
 
@@ -84,16 +77,9 @@ exports.postRegisterKH = async function (req, res, next) {
 };
 
 exports.getDsdt = async function (req, res, next) {
-  let report = req.flash("report");
-
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
   const dtArr = await khachhangM.getDT();
 
-  res.render("dsdt", {
+  res.render("kh-dsdt", {
     pageTitle: "Danh sách đối tác",
     doitacs: dtArr,
   });
@@ -109,7 +95,7 @@ exports.getDsch = async function (req, res, next) {
     obj.TenQuan = infoDt[0].TenQuanAn;
     obj.MaDoiTac = infoDt[0].MaDoiTac;
   });
-  res.render("dsch", {
+  res.render("kh-dsch", {
     pageTitle: "Danh sách cửa hàng",
     dtId: dtId,
     shops: shopArr,
@@ -122,7 +108,7 @@ exports.getDsma = async function (req, res, next) {
 
   const menuArr = await doitacM.getMenus(chId, dtId);
 
-  res.render("dsma", {
+  res.render("kh-dsma", {
     pageTitle: "Danh sách món ăn",
     chId: chId,
     menus: menuArr,
@@ -154,14 +140,6 @@ exports.postAddMonAn = async function (req, res, next) {
 };
 
 exports.getGioHang = async function (req, res, next) {
-  let report = req.flash("report");
-
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
-
   const user = req.user;
   // console.log(user);
   const infoKhachHang = await khachhangM.getInfo(user.Email);
@@ -171,7 +149,7 @@ exports.getGioHang = async function (req, res, next) {
     const infoChDt = await khachhangM.getInfoChDt(cartArr[0].MaMon);
     const gia = await khachhangM.addTongGia();
     const total = Number(gia.sum) + 20000;
-    return res.render("giohang-kh", {
+    return res.render("kh-giohang", {
       pageTitle: "Giỏ Hàng Của Khách Hàng",
       carts: cartArr,
       sum: gia.sum,
@@ -182,7 +160,7 @@ exports.getGioHang = async function (req, res, next) {
       mess: null,
     });
   }
-  res.render("giohang-kh", {
+  res.render("kh-giohang", {
     pageTitle: "Giỏ Hàng Của Khách Hàng",
     mess: "Giỏ hàng của khách hàng hiện đang trống",
   });
@@ -241,18 +219,6 @@ exports.postOrderMonAn = async function (req, res, next) {
 };
 
 exports.getDsdh = async function (req, res, next) {
-  let report = req.flash("report");
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message;
-  } else {
-    message = null;
-  }
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
   const user = req.user;
   const infoKhachHang = await khachhangM.getInfo(user.Email);
 
@@ -266,7 +232,7 @@ exports.getDsdh = async function (req, res, next) {
     return true;
   });
 
-  res.render("donhang-kh", {
+  res.render("kh-donhang", {
     pageTitle: "Danh sách đơn hàng đang đặt của đối tác",
     dhArr: dhhientai,
   });
@@ -286,7 +252,7 @@ exports.getDhDetail = async function (req, res, next) {
     data.sum = data.GiaThanh * data.SoluongMon;
     total += data.sum;
   });
-  res.render("donhang-detail", {
+  res.render("kh-donhang-detail", {
     pageTitle: "Chi Tiết Đơn Hàng",
     infoArr: info,
     total: total,
@@ -339,7 +305,7 @@ exports.getDsdhs = async function (req, res, next) {
     return true;
   });
 
-  res.render("donhangs-kh", {
+  res.render("kh-lichsudonhang", {
     pageTitle: "Lịch sử đơn hàng của đối tác",
     dhArr: dhhientai,
   });

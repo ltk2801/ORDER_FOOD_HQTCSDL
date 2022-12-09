@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row gap-3 flex-nowrap p-3 fw-bold">
+    <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+      >
+        <a
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none p-2"
+        >
+          <span class="fs-5 d-none d-sm-inline"><h1
+              style="color: #a61e4d;"
+            >Menu</h1></span>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          id="menu"
+        >
+          <li class="nav-item">
+            <a href="/" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/user" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Thông Tin Cá Nhân</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/chondonhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Chọn đơn hàng</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/donhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Đơn hàng đang
+                giao</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/taixe/lichsudonhang" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline text-white">Xem Danh Sách Đơn
+                Hàng Đã Giao</span>
+            </a>
+          </li>
+
+        </ul>
+        <hr />
+      </div>
+    </div>
+    <div class="col py-3">
+      {{#if reportMessage}}
+        <div class="alert alert-success" role="alert">
+          <h3 class="text-center fw-bold">
+            {{reportMessage}}
+          </h3>
+        </div>
+      {{/if}}
+      <h1 class="mb-5">Edit tình trạng đơn hàng có mã là {{dhId}}</h1>
+      <div class="w-100 d-flex justify-content-start">
+        <form
+          class="mx-1 mx-md-4 pb-5 fw-bold w-50"
+          action="/taixe/edit-donhang"
+          method="POST"
+        >
+
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <input
+                type="text"
+                id="mdh"
+                name="mdh"
+                class="form-control"
+                placeholder=""
+                value="{{info.MaDH}}"
+                readonly
+              />
+              <label class="form-label" for="mdh">Mã Đơn Hàng</label>
+            </div>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-4">
+            <div class="form-outline flex-fill mb-0">
+
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                name="tt"
+                id="tt"
+              >
+                <option
+                  value="{{info.TinhTrangDH}}"
+                  selected
+                >{{info.TinhTrangDH}}</option>
+                <option value="Đã nhận đơn hàng">Đã nhận đơn hàng</option>
+                <option value="Đang vận chuyển">Đang vận chuyển</option>
+                <option value="Đã giao hàng">Đã giao hàng</option>
+              </select>
+              <label for="tt">Tình trạng Đơn hàng:</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success btn-lg">Edit Tình Trạng
+            Đơn Hàng</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

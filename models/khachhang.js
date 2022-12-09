@@ -18,10 +18,9 @@ exports.getLastID_KH = async function () {
 };
 
 exports.getInfo = async function (email) {
-  const rs = await db.any(
-    'select * from public."KhachHang"where"Email"like $1',
-    [email]
-  );
+  const rs = await db.any('select * from public."KhachHang"where"Email" = $1', [
+    email,
+  ]);
   return rs;
 };
 
@@ -33,7 +32,7 @@ exports.getDT = async function () {
 
 exports.getMenu = async function (id) {
   const rs = await db.any(
-    'select * from public."ThucDon" where "MaMon" like $1 ',
+    'select * from public."ThucDon" where "MaMon" = $1 ',
     [id]
   );
 

@@ -1,0 +1,82 @@
+
+  <div class="container-fluid">
+    <div class="row gap-3 flex-nowrap p-3 fw-bold">
+      <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
+        <div
+          class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+        >
+          <a
+            class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none p-2"
+          >
+            <span class="fs-5 d-none d-sm-inline"><h1
+                style="color: #a61e4d;"
+              >Menu</h1></span>
+          </a>
+          <ul
+            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+            id="menu"
+          >
+            <li class="nav-item">
+              <a href="/" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/user" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Thông Tin Cá
+                  Nhân</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/doitac/cuahang" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Cửa Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/doitac/donhang"  class="nav-link align-middle px-0">
+                <i class="fs-4 bi-house"></i>
+                <span class="ms-1 d-none d-sm-inline text-white">Đơn Hàng</span>
+              </a>
+            </li>
+
+          </ul>
+          <hr />
+        </div>
+      </div>
+    <div class="col py-3">
+                  <h1 class="mb-5">Chi tiết đơn hàng của bạn </h1>
+    <table class="table table-striped rounded" style="background-color:#f0f8ff ;">
+  <thead>
+    <tr>
+      <th scope="col">Tên Món</th>
+      <th scope="col">Giá Thành</th>
+      <th scope="col">Số Lượng Món</th>
+      <th scope="col">Tổng Số Tiền</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each info}}
+    <tr>
+      <th scope="row">{{this.TenMon}}</th>
+      <td>{{this.GiaThanh}}</td>
+      <td>{{this.SoluongMon}}</td>
+      <td>{{this.TongGia}}</td>
+      
+      </tr>
+    {{/each}}
+       <tr>
+      <th></th>
+      <td></td>
+      <td></td>
+      <td class="fw-bold">Tổng Cộng : {{total}}</td>
+      
+      </tr>
+  </tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </div>

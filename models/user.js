@@ -10,14 +10,14 @@ exports.Signin = async function (account) {
 };
 
 exports.findEmail = async function (email) {
-  const rs = await db.any('select * from public."Users"where"Email"like $1', [
+  const rs = await db.any('select * from public."Users"where"Email" = $1', [
     email,
   ]);
   return rs;
 };
 
 exports.findUName = async function (uname) {
-  const rs = await db.any('select * from public."Users"where"UName"like $1', [
+  const rs = await db.any('select * from public."Users"where"UName" = $1', [
     uname,
   ]);
   return rs;

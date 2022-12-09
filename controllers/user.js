@@ -1,29 +1,14 @@
 const userM = require("../models/user");
 
 exports.getRegister = async function (req, res, next) {
-  res.render("register", {
+  res.render("user-register", {
     pageTitle: "Register",
   });
 };
 
 exports.getLogin = async function (req, res, next) {
-  let report = req.flash("report");
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message;
-  } else {
-    message = null;
-  }
-  if (report.length > 0) {
-    report = report;
-  } else {
-    report = null;
-  }
-
-  res.render("login", {
+  res.render("user-login", {
     pageTitle: "Login",
-    errorMessage: message,
-    reportMessage: report,
   });
 };
 
@@ -63,7 +48,7 @@ exports.postLogin = async function (req, res, next) {
           break;
       }
       return req.session.save((err) => {
-        // console.log(req.session.user.Permission);
+        // console.log(req.session.user);
         res.redirect("/user");
       });
     })

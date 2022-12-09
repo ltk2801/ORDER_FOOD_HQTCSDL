@@ -12,19 +12,19 @@ router.get(
 
 router.post("/register/khachhang", khController.postRegisterKH);
 
-router.get("/khachhang/dsdt", khController.getDsdt);
+router.get("/khachhang/dsdt", isAuth.authKH, khController.getDsdt);
 
-router.get("/khachhang/dsch/:dtId", khController.getDsch);
+router.get("/khachhang/dsch/:dtId", isAuth.authKH, khController.getDsch);
 
-router.get("/khachhang/dsma/:dtId/:chId", khController.getDsma);
+router.get("/khachhang/dsma/:dtId/:chId", isAuth.authKH, khController.getDsma);
 
-router.get("/khachhang/giohang", khController.getGioHang);
+router.get("/khachhang/giohang", isAuth.authKH, khController.getGioHang);
 
-router.get("/khachhang/dsdh", khController.getDsdh);
+router.get("/khachhang/dsdh", isAuth.authKH, khController.getDsdh);
 
-router.get("/khachhang/dh/:dhId", khController.getDhDetail);
+router.get("/khachhang/dh/:dhId", isAuth.authKH, khController.getDhDetail);
 
-router.get("/khachhang/dsdh/lichsu", khController.getDsdhs);
+router.get("/khachhang/dsdh/lichsu", isAuth.authKH, khController.getDsdhs);
 
 router.post("/khachhang/addgiohang", khController.postAddMonAn);
 
