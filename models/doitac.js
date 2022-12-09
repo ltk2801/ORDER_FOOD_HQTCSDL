@@ -79,6 +79,14 @@ exports.getInfo = async function (email) {
   return rs;
 };
 
+exports.getInfoID = async function (id) {
+  const rs = await db.any(
+    'select * from public."DoiTac"where"MaDoiTac"like $1',
+    [id]
+  );
+  return rs;
+};
+
 exports.getCuaHang = async function (iddt) {
   const rs = await db.any(
     'select * from public."CuaHang"where"MaDoiTac"like $1',

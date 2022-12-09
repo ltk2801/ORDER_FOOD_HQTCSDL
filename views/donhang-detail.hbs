@@ -1,5 +1,4 @@
-
-  <div class="container-fluid">
+ <div class="container-fluid">
     <div class="row gap-3 flex-nowrap p-3 fw-bold">
       <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
         <div
@@ -30,13 +29,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/doitac/cuahang" class="nav-link align-middle px-0">
+              <a href="/khachhang/dsdt" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i>
-                <span class="ms-1 d-none d-sm-inline text-white">Cửa Hàng</span>
+                <span class="ms-1 d-none d-sm-inline text-white">Đặt Đồ Ăn</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/doitac/donhang"  class="nav-link align-middle px-0">
+              <a href="/khachhang/dsdh" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i>
                 <span class="ms-1 d-none d-sm-inline text-white">Đơn Hàng</span>
               </a>
@@ -48,65 +47,71 @@
       </div>
       <div class="col py-3">
         {{#if reportMessage}}
-  <div class="alert alert-success" role="alert">
-    <h3 class="text-center fw-bold">
-      {{reportMessage}}
-    </h3>
+                <div class="alert alert-success" role="alert">
+             <h3 class="text-center fw-bold">
+              {{reportMessage}}
+               </h3>
 
-  </div>
+              </div>
+     
+ 
+
+      
 
 {{/if}}
-        <div class="d-flex justify-content-between mb-5">
-              <h1>Danh sách món ăn của cửa hàng {{idCH}} </h1>
-              
-              <form action="/doitac/themmonan" method="get">
-                  <button class="btn btn-success" type="submit">Thêm món ăn</button>
-                  <input type="hidden" value="{{idCH}}" name="chId">
-              </form>
-           
-               
-        </div>
-        <table class="table table-striped rounded" style="background-color:#f0f8ff ;">
+                  <h1 class="mb-5">Chi tiết đơn hàng của bạn </h1>
+                        <table class="table table-striped rounded" style="background-color:#f0f8ff ;">
   <thead>
     <tr>
-      <th scope="col">Mã Món Ăn</th>
-      <th scope="col">Tên Món Ăn</th>
+      <th scope="col">Tên Món</th>
       <th scope="col">Giá Thành</th>
-      <th scope="col">Miêu Tả</th>
-      <th scope="col">Tình Trạng</th>
-       <th scope="col"></th>
-        <th scope="col"></th>
-         <th scope="col"></th>
+      <th scope="col">Số Lượng Món</th>
+      <th scope="col">Tổng Số Tiền</th>
     </tr>
   </thead>
   <tbody>
-     {{#each menus}}
+    {{#each infoArr}}
     <tr>
-      <th scope="row">{{this.MaMon}}</th>
-      <td>{{this.TenMon}}</td>
+      <th scope="row">{{this.TenMon}}</th>
       <td>{{this.GiaThanh}}</td>
-      <td>{{this.MieuTa}}</td>
-      <td>{{this.TinhTrang}}</td>
-         <td>
-        <form action="/doitac/edit-monan/{{this.MaMon}}" method="get">
-             <button class="btn btn-success">Edit</button>
-        </form>
-       
-        </td> 
-        <td>
-        <form action="/doitac/delete-monan" method="post">
-             <button class="btn btn-danger">Delete</button>
-              <input type="hidden" value="{{this.MaMon}}" name="monanId">
-              <input type="hidden" value="{{this.MaCuaHang}}" name="chId">
-        </form>
-       
-        </td>  
-    </tr>
+      <td>{{this.SoluongMon}}</td>
+      <td>{{this.sum}}</td>
+      
+      </tr>
     {{/each}}
-
+       <tr>
+      <th></th>
+      <td></td>
+      <td></td>
+      <td class="fw-bold">Tổng Cộng : {{total}}</td>
+      
+      </tr>
+         <tr>
+      <th ></th>
+      <td></td>
+      <td></td>
+      <td class="fw-bold">Phí vận chuyển : 20000 </td>
+      
+      </tr>
+             <tr>
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+      <td class="fw-bold">Tổng chi phí : {{totalsum}} </td>
+      
+      </tr>
+   
+ 
+ 
    
   </tbody>
 </table>
+   <form action="/khachhang/dsdh" method="get">
+             <button class="btn btn-success">Back</button>
+        </form>
+    <form action="/khachhang/dsdh/lichsu" method="get">
+             <button class="btn btn-success">Xem Lịch Sử Đơn Hàng Của Bạn</button>
+        </form>
         </div>
       </div>
     </div>

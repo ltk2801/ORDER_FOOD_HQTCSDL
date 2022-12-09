@@ -1,7 +1,7 @@
 
   <div class="container-fluid">
     <div class="row gap-3 flex-nowrap p-3 fw-bold">
-      <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
+         <div class="col-md-2 px-0 rounded" style="background-color: #14213d;">
         <div
           class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
         >
@@ -30,13 +30,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/doitac/cuahang" class="nav-link align-middle px-0">
+              <a href="/khachhang/dsdt" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i>
-                <span class="ms-1 d-none d-sm-inline text-white">Cửa Hàng</span>
+                <span class="ms-1 d-none d-sm-inline text-white">Đặt Đồ Ăn</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/doitac/donhang"  class="nav-link align-middle px-0">
+              <a href="/khachhang/dsdh" class="nav-link align-middle px-0">
                 <i class="fs-4 bi-house"></i>
                 <span class="ms-1 d-none d-sm-inline text-white">Đơn Hàng</span>
               </a>
@@ -47,66 +47,49 @@
         </div>
       </div>
       <div class="col py-3">
-        {{#if reportMessage}}
-  <div class="alert alert-success" role="alert">
-    <h3 class="text-center fw-bold">
-      {{reportMessage}}
-    </h3>
-
-  </div>
-
-{{/if}}
-        <div class="d-flex justify-content-between mb-5">
-              <h1>Danh sách món ăn của cửa hàng {{idCH}} </h1>
+              <h1 class="mb-5">Danh sách cửa hàng của đối tác {{dtId}}</h1>
               
-              <form action="/doitac/themmonan" method="get">
-                  <button class="btn btn-success" type="submit">Thêm món ăn</button>
-                  <input type="hidden" value="{{idCH}}" name="chId">
-              </form>
-           
-               
-        </div>
+         
+                   
+    
         <table class="table table-striped rounded" style="background-color:#f0f8ff ;">
   <thead>
     <tr>
-      <th scope="col">Mã Món Ăn</th>
-      <th scope="col">Tên Món Ăn</th>
-      <th scope="col">Giá Thành</th>
-      <th scope="col">Miêu Tả</th>
+      <th scope="col">Mã Cửa Hàng</th>
+      <th scope="col">Tên Quán Ăn</th>
+      <th scope="col">Địa chỉ</th>
+      <th scope="col">Thời Gian Hoạt Động</th>
       <th scope="col">Tình Trạng</th>
        <th scope="col"></th>
-        <th scope="col"></th>
-         <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-     {{#each menus}}
+    {{#each shops}}
     <tr>
-      <th scope="row">{{this.MaMon}}</th>
-      <td>{{this.TenMon}}</td>
-      <td>{{this.GiaThanh}}</td>
-      <td>{{this.MieuTa}}</td>
+      <th scope="row">{{this.MaCuaHang}}</th>
+      <td>{{this.TenQuan}}</td>
+      <td>{{this.DiaChi}}</td>
+      <td>{{this.ThoiGianHD}}</td>
       <td>{{this.TinhTrang}}</td>
-         <td>
-        <form action="/doitac/edit-monan/{{this.MaMon}}" method="get">
-             <button class="btn btn-success">Edit</button>
+      <td>
+        <form action="/khachhang/dsma/{{this.MaDoiTac}}/{{this.MaCuaHang}}" method="get">
+             <button class="btn btn-success">Menu</button>
         </form>
        
-        </td> 
-        <td>
-        <form action="/doitac/delete-monan" method="post">
-             <button class="btn btn-danger">Delete</button>
-              <input type="hidden" value="{{this.MaMon}}" name="monanId">
-              <input type="hidden" value="{{this.MaCuaHang}}" name="chId">
-        </form>
-       
-        </td>  
-    </tr>
+        </td>
+      </tr>
     {{/each}}
 
+
+   
+ 
+ 
    
   </tbody>
 </table>
+          <form action="/khachhang/dsdt" method="get">
+             <button class="btn btn-success">Back</button>
+        </form>
         </div>
       </div>
     </div>

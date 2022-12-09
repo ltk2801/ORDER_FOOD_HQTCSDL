@@ -57,6 +57,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.haveUser = req.session.isLoggedIn;
   res.locals.reportMessage = req.flash("report");
+  res.locals.errorMessage = req.flash("error");
   next();
 });
 

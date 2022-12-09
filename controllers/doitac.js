@@ -270,7 +270,6 @@ exports.getEditMonAn = async function (req, res, next) {
 
   const food = await doitacM.getInfoMonAn(idma);
 
-  console.log(food);
   res.render("monan-edit", {
     pageTitle: "Edit món ăn",
     food: food[0],
